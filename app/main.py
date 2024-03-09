@@ -13,14 +13,12 @@ def main():
     data = connection.recv(4096)  # Read data from the connection
     print(f"Received data: {data}")
 
-    response = "HTTP/1.1 200 OK\r\n\r\n"  # Prepare the HTTP response
-    connection.sendall(response.encode())  # Send the response
-    connection.close()  # Close the connection
     request_line = data.decode().splitlines()[0]  # Get the request line
     path = request_line.split()[1]  # Extract the path from the request line
 
     resp_200 = "HTTP/1.1 200 OK\r\n\r\n"
     resp_404 = "HTTP/1.1 404 Not Found\r\n\r\n"
+    print(path)
     if path == "/":
         response = resp_200  # Prepare the 200 OK response
     else:
